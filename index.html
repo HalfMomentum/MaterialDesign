@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en" >
+
+<head>
+  <meta charset="UTF-8">
+  <title>Bootstrap Tree Menu Example</title>
+  
+  
+  <link rel='stylesheet prefetch' href='https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css'>
+
+      <link rel="stylesheet" href="css/style.css">
+  
+</head>
+
+<body>
+
+<div id="myModal" class="modal fade" role="dialog">
+  <div class="modal-dialog">
+
+    <!-- Modal content-->
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+        <h4 class="modal-title">Modal Header</h4>
+      </div>
+      <div class="modal-body">
+        <p>Some text in the modal.</p>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+
+  <div class="container">
+  <div class="row">
+    <h1>Bootstrap Tree Menu Example</h1>
+  </div>
+</div>
+<div class="container">
+<div class="row">
+  <div class="col-md-3">
+    <div class="well no-padding">
+        <div>
+            <ul class="nav nav-list nav-menu-list-style">
+                <li><label class="tree-toggle nav-header glyphicon-icon-rpad"><span class="glyphicon glyphicon-folder-close m5"></span>Root Node
+                            <span class="menu-collapsible-icon glyphicon glyphicon-chevron-down"></span></label>
+                    <ul class="nav nav-list tree bullets">
+                        <li><a href="#">JavaScript</a></li>
+                        <li><a href="#">CSS <span class="badge">42</span></a></li>
+                        <li><label class="tree-toggle nav-header">Level 1</label>
+                            <ul class="nav nav-list tree">
+                                <li><a href="#">Colors</a></li>
+                                <li><a href="#">Sizes</a></li>
+                                <li  class =" nav-header" style="padding-left: 10%;"><label class="tree-toggle" style=" width: 100%;">Level 2</label>
+                                    <ul class="nav nav-list tree">
+                                        <li data-toggle="modal" data-target="#myModal"><a href="#">Horizontal</a></li>
+                                        <li><a href="#">Vertical</a></li>
+                                    </ul>
+                                </li>
+                            </ul>
+                        </li>
+                    </ul>
+                </li>
+                <li class="divider"></li>
+                <li><label class="tree-toggle nav-header" title="This button expands">Some Property</label>
+                    <ul class="nav nav-list tree">
+                        <li><a href="#">Overview</a></li>
+                        <li><a href="#">CSS</a></li>
+                        <li><li  class =" nav-header" style="padding-left: 5%;"><label class="tree-toggle" style=" width: 100%;">Level 1</label>
+                            <ul class="nav nav-list tree">
+                                <li><a href="#">Text</a></li>
+                                <li><a href="#">Images</a></li>
+                                <!-- <li><label class="tree-toggle nav-header">Mobile Devices</label>
+                                    <ul class="nav nav-list tree">
+                                        <li><a href="#">iPhone</a></li>
+                                        <li><a href="#">Samsung</a></li>
+                                    </ul>
+                                </li> -->
+                                <li  class =" nav-header" style="padding-left: 10%;"><label class="tree-toggle" style=" width: 100%;">Level 2</label>
+                                    <ul class="nav nav-list tree">
+                                        <li><a href="#">Horizontal</a></li>
+                                        <li><a href="#">Vertical</a></li>
+                                    </ul>
+                                </li>
+                            </ul>
+                        </li>
+                        <li><label class="tree-toggle nav-header">Coding</label>
+                            <ul class="nav nav-list tree">
+                                <li><a href="#">JavaScript</a></li>
+                                <li><a href="#">jQuery</a></li>
+                                <li><label class="tree-toggle nav-header">HTML DOM</label>
+                                    <ul class="nav nav-list tree">
+                                        <li><a href="#">DOM Elements</a></li>
+                                        <li><a href="#">Recursive</a></li>
+                                    </ul>
+                                </li>
+                            </ul>
+                        </li>
+                    </ul>
+                </li>
+                <li><label class="tree-toggle nav-header">Material Design</label>
+                    <ul class="nav nav-list tree">
+                        <li><a href="#">Overview</a></li>
+                        <li><a href="#">CSS</a></li>
+                        <li  class =" nav-header" style="padding-left: 5%;"><label class="tree-toggle" style=" width: 100%;">Level 1</label>
+                            <ul class="nav nav-list tree">
+                                <li><a href="#">Text</a></li>
+                                <li><a href="#">Images</a></li>
+                            </ul>   
+                        </li>
+                    </ul>
+                </li>        
+            </ul>
+        </div>
+    </div>
+    </div>
+    </div>
+</div>
+  <script src='http://cdnjs.cloudflare.com/ajax/libs/jquery/2.2.2/jquery.min.js'></script>
+<script src='http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js'></script>
+
+  
+
+    <script  src="js/index.js"></script>
+
+
+
+
+</body>
+
+</html>
