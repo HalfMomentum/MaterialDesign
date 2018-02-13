@@ -1,0 +1,26 @@
+{
+  "name": "sidemenu",
+  "version": "1.0.0",
+  "description": "Collaborative space for developing the Website for material science client.",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/HalfMomentum/MaterialDesign.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/HalfMomentum/MaterialDesign/issues"
+  },
+  "dependencies": {
+    "body-parser": "*",
+    "express": "*",
+    "mongoose": "*",
+    "pug": "^2.0.0-rc.4"
+  },
+  "homepage": "https://github.com/HalfMomentum/MaterialDesign#readme"
+}

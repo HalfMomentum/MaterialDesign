@@ -5,11 +5,18 @@
   <meta charset="UTF-8">
   <title>Bootstrap Tree Menu Example</title>
   
-  
+    <style type="text/css">
+        .p-2{
+            padding: 2rem;
+        }
+        .dispn{
+            display: none !important;
+        }
+    </style>  
   <link rel='stylesheet prefetch' href='https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css'>
 
       <link rel="stylesheet" href="css/style.css">
-  
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js" crossorigin="anonymous"></script>  
 </head>
 
 <body>
@@ -36,8 +43,10 @@
 
 
   <div class="container">
-  <div class="row">
-    <h1>Bootstrap Tree Menu Example</h1>
+  <div class="row" style="width:100%;">
+    <h1 class="col-md-8" style="border: 1px solid black;">Bootstrap Tree Menu Example</h1>
+    <a href="/login"><button class="col-2 p-2">Login</button></a>
+    <a href="/register"><button class="col-2 p-2">Sign Up</button></a>
   </div>
 </div>
 <div class="container">
@@ -57,8 +66,8 @@
                                 <li><a href="#">Sizes</a></li>
                                 <li  class =" nav-header" style="padding-left: 10%;"><label class="tree-toggle" style=" width: 100%;">Level 2</label>
                                     <ul class="nav nav-list tree">
-                                        <li data-toggle="modal" data-target="#myModal"><a href="#">Horizontal</a></li>
-                                        <li><a href="#">Vertical</a></li>
+                                        <li data-toggle="modal" data-target="#myModal" id="hori"><a href="#">Horizontal</a></li>
+                                        <li><a href="#" id="vert">Vertical</a></li>
                                     </ul>
                                 </li>
                             </ul>
@@ -80,7 +89,7 @@
                                         <li><a href="#">Samsung</a></li>
                                     </ul>
                                 </li> -->
-                                <li  class =" nav-header" style="padding-left: 10%;"><label class="tree-toggle" style=" width: 100%;">Level 2</label>
+                                <li  id="l2" class =" nav-header" style="padding-left: 10%;"><label class="tree-toggle" style=" width: 100%;">Level 2</label>
                                     <ul class="nav nav-list tree">
                                         <li><a href="#">Horizontal</a></li>
                                         <li><a href="#">Vertical</a></li>
@@ -125,8 +134,20 @@
 
   
 
-    <script  src="js/index.js"></script>
+    <script  src="js/index.js">
 
+    </script>
+<script type="text/javascript">   console.log("asjdoasdoasopd");
+        // console.log(user);
+        $("#hori").click(function(){
+            // alert("asodp");
+            $("#vert").toggleClass("dispn");
+        })
+        $("#vert").click(function(){
+            // alert("asodp");
+            $("#l2").toggleClass("dispn");
+        })
+        </script>
 
 
 
