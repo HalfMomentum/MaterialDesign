@@ -2,12 +2,37 @@ var express= require('express');
 var app=express();
 var bodyParser=require('body-parser');
 var mongoose= require('mongoose');
-
+var Path = require('path');	
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({
   extended: true
 }));
 
+/*
+Following section added by Madhav
+*/
+
+var exphbs = require('express-handlebars');
+
+app.set('views',__dirname+'/template/')
+app.engine('html', exphbs(
+	{ 
+		extname: 'html',
+		defaultLayout: 'layout',
+		partialsDir : [__dirname+'/template/partials']
+	}
+));
+app.set('view engine', 'handlebars');
+
+app.get('/input', function (req, res) {
+
+	res.render('index.html', { "title": "hello index" });// <<-- notice the render() function :)
+	//have a look at layout.html, index.html inside template, ...
+});
+
+/*
+above section is added by Madhav
+ */
 
 //Connect to Mongoose
 mongoose.connect("mongodb://localhost/users");
