@@ -18,15 +18,15 @@ app.set('views',__dirname+'/template/')
 app.engine('html', exphbs(
 	{ 
 		extname: 'html',
-		defaultLayout: 'layout',
+		defaultLayout: __dirname+'/template/layout',
 		partialsDir : [__dirname+'/template/partials']
 	}
 ));
 app.set('view engine', 'handlebars');
 
-app.get('/input', function (req, res) {
+app.get('/profile', function (req, res) {
 
-	res.render('index.html', { "title": "hello index" });// <<-- notice the render() function :)
+	res.render('profile.html', /*context goes here*/{ "title": "hello index" });// <<-- notice the render() function :)
 	//have a look at layout.html, index.html inside template, ...
 });
 
@@ -93,5 +93,5 @@ app.post("/register", function(req,res){
 
 
 app.listen(3000, function(){
-	console.log("Listening on port 3000!!");
+	console.log("Listening on port http://localhost:3000/");
 })
