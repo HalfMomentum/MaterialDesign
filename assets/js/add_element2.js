@@ -6,6 +6,7 @@ function add(div_id) {
 
     var lab = document.createElement('div');
     lab.className = 'col';
+    lab.textContent = "Symbol desc";
 
     var txt = document.createElement('label');
     txt.text = 'Symbol desc';
