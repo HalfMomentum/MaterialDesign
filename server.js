@@ -38,7 +38,7 @@ app.post("/login", function(req,res){
 	var user= db.collection('user').find(req.body).toArray(function(err, results) {
   console.log(results);
   	req.user=results[0];
-  	req.user.authenticated=true;
+  	// req.user.authenticated=true;
   	// res.redirect('/')
   	res.sendFile('index.html', {root: __dirname, user: req.user, isAuth: req.user.authenticated});
 	})
