@@ -1,13 +1,44 @@
 var express= require('express');
 var app=express();
-var bodyParser=require('body-parser');
+var bodyParser=require('body-parser');//<<-- (error 30X) security compromized
 var mongoose= require('mongoose');
+var Path = require('path');	
 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({
   extended: true
 }));
 
+/*
+Following section added by Madhav
+*/
+
+//adding static folder to serve css,js,images, etc
+app.use(express.static(__dirname+'/assets'));
+/**
+ * setting up view engine to render html files beautifully
+ */
+var exphbs = require('express-handlebars');
+
+app.set('views',__dirname+'/template/')
+app.engine('html', exphbs(
+	{ 
+		extname: 'html',
+		layoutsDir: __dirname+'/template/layouts/',
+		defaultLayout: __dirname+'/template/layouts/layout',
+		partialsDir : [__dirname+'/template/partials']
+	}
+));
+
+app.set('view engine', 'handlebars');
+
+//All routes defined in routes.js
+var route = require('./routes')
+app.use('/', route);
+
+/*
+above section is added by Madhav
+ */
 
 //Connect to Mongoose
 mongoose.connect("mongodb://localhost/users");
@@ -68,5 +99,5 @@ app.post("/register", function(req,res){
 
 
 app.listen(3000, function(){
-	console.log("Listening on port 3000!!");
+	console.log("Listening on port http://localhost:3000/");
 })

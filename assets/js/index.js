@@ -3,3 +3,6 @@ $('.tree-toggle').click(function () {	$(this).parent().children('ul.tree').toggl
 $(function(){
 $('.tree-toggle').parent().children('ul.tree').toggle(200);
 })
+$(function () {
+    $('[data-toggle="popover"]').popover()
+})
