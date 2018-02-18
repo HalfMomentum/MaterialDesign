@@ -10,8 +10,14 @@ const expressValidator = require('express-validator');
 const passport = require('passport');
 const LocalStrategy =require('passport-local').Strategy;
 
-app.use(expressValidator())
+// Express Session Middleware
+app.use(session({
+  secret: 'keyboard cat',
+  resave: true,
+  saveUninitialized: true
+}));
 
+app.use(expressValidator())
 require('./config/passport')(passport);
 app.use(passport.initialize());
 app.use(passport.session());
@@ -25,14 +31,6 @@ app.get("*",function(req,res,next){
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({
   extended: true
-}));
-
-
-// Express Session Middleware
-app.use(session({
-  secret: 'keyboard cat',
-  resave: true,
-  saveUninitialized: true
 }));
 
 

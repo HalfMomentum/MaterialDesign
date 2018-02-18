@@ -9,8 +9,12 @@
         <a href="#" class="nav-item nav-link">Support</a>
     </div>
     <div class="navbar-nav">
+        {{#if user}}
+        <a href="logout" class="nav-item nav-link">Logout</a>        
+        <a href="profile" class="nav-item nav-link">{{user.name}}</a>
+        {{else}}
         <a href="login" class="nav-item nav-link">Login</a>
         <a href="register" class="nav-item nav-link">Register</a>
-        <a href="profile" class="nav-item nav-link">{myName}</a>
+        {{/if}}
     </div>
 </nav>

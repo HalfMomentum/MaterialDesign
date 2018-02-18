@@ -5,13 +5,11 @@ router.get('/profile', function (req, res) {
 
     res.render('profile.html', /*context goes here*/ {
         title: "Manage Profile",
-        user: req.user
     }); // <<-- notice the render() function :)
     //have a look at layout.html, index.html inside template, ...
 });
 
 router.get('/', function (req, res) {
-
     res.render('about.html', /*context goes here*/ {
         title: "Explore",
         layout: 'layout_info'
