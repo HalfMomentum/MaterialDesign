@@ -1,11 +1,11 @@
-var express= require('express');
-var app=express();
-var bodyParser=require('body-parser');//<<-- (error 30X) security compromized
-const mongoose= require('mongoose');
-var Path = require('path');	
+var express = require('express');
+var app = express();
+var bodyParser = require('body-parser'); //<<-- (error 30X) security compromized
+const mongoose = require('mongoose');
+var Path = require('path');
 const flash = require('connect-flash');
 const session = require('express-session');
-const bcrypt= require('bcryptjs');
+const bcrypt = require('bcryptjs');
 const expressValidator = require('express-validator');
 const passport = require('passport');
 
@@ -33,22 +33,20 @@ Following section added by Madhav
 */
 
 //adding static folder to serve css,js,images, etc
-app.use(express.static(__dirname+'/assets'));
+app.use(express.static(__dirname + '/assets'));
 
 /*
  * setting up view engine to render html files
  */
 var exphbs = require('express-handlebars');
 
-app.set('views',__dirname+'/template/')
-app.engine('html', exphbs(
-	{ 
-		extname: 'html',
-		layoutsDir: __dirname+'/template/layouts/',
-		defaultLayout: __dirname+'/template/layouts/layout',
-		partialsDir : [__dirname+'/template/partials']
-	}
-));
+app.set('views', __dirname + '/template/')
+app.engine('html', exphbs({
+  extname: 'html',
+  layoutsDir: __dirname + '/template/layouts/',
+  defaultLayout: __dirname + '/template/layouts/layout',
+  partialsDir: [__dirname + '/template/partials']
+}));
 
 app.set('view engine', 'handlebars');
 
@@ -64,20 +62,22 @@ above section is added by Madhav
 mongoose.connect("mongodb://localhost/users");
 var db = mongoose.connection;
 
-db.once('open',function(){
-	console.log("connected to database users");
+db.once('open', function () {
+  console.log("connected to database users");
 })
 
-db.on('error', function(err){
-	console.log(err);
+db.on('error', function (err) {
+  console.log(err);
 })
 
-app.get('/', function(req, res) {
+/* app.get('/', function (req, res) {
   // res.send('Hello World');
   // if(req.user.authenticated)
   // 	{console.log(req.user.authenticated);}
-  res.sendFile('index2.html', {root: __dirname});
-});
+  res.sendFile('index2.html', {
+    root: __dirname
+  });
+}); */
 
 // app.get("/login",function(req,res){
 // 	res.sendFile("views/LoginPage.html", {root: __dirname});
@@ -123,41 +123,48 @@ app.get('/', function(req, res) {
 let User = require('./models/user');
 
 // Register Form
-app.get('/register', function(req, res){
-  res.sendFile(__dirname+'/views/SignupPage.html');
+app.get('/register', function (req, res) {
+  //res.sendFile(__dirname+'/views/SignupPage.html');
+  res.render('signup.html', {
+    title: "Sign Up",
+    layout: 'layout_info'
+  })
 });
 
 // Register Proccess
-app.post('/register', function(req, res){
+app.post('/register', function (req, res) {
   const name = req.body.name;
   const password = req.body.password;
   const password2 = req.body.password2;
-  console.log(password,"pass=",password2);
+  console.log(password, "pass=", password2);
   req.checkBody('name', 'Name is required').notEmpty();
   req.checkBody('password', 'Password is required').notEmpty();
   req.checkBody('password2', 'Passwords do not match').equals(req.body.password);
 
   let errors = req.validationErrors();
 
-  if(errors){
-  	console.log("Ran into errors",errors);
-    res.sendFile(__dirname+'/views/SignupPage.html', {
+  if (errors) {
+    console.log("Ran into errors", errors);
+    /* res.sendFile(__dirname+'/views/SignupPage.html', {
       errors:errors
+    }); */
+    res.render('signup.html', {
+      errors: errors
     });
   } else {
     let newUser = new User({
-      name:name,
-      password:password
+      name: name,
+      password: password
     });
 
-    bcrypt.genSalt(10, function(err, salt){
-      bcrypt.hash(newUser.password, salt, function(err, hash){
-        if(err){
+    bcrypt.genSalt(10, function (err, salt) {
+      bcrypt.hash(newUser.password, salt, function (err, hash) {
+        if (err) {
           console.log(err);
         }
         newUser.password = hash;
-        newUser.save(function(err){
-          if(err){
+        newUser.save(function (err) {
+          if (err) {
             console.log(err);
             return;
           } else {
@@ -171,23 +178,13 @@ app.post('/register', function(req, res){
 });
 
 //Login
-app.get("/login",function(req,res){
-	res.sendFile("views/LoginPage.html", {root: __dirname});
+app.get("/login", function (req, res) {
+  /* res.sendFile("views/LoginPage.html", {
+    root: __dirname
+  }); */
+  res.render('login.html',{title:'Log In',layout:'layout_info'})
 });
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-app.listen(3000, function(){
-	console.log("Listening on port http://localhost:3000/");
+app.listen(3000, function () {
+  console.log("Listening on port http://localhost:3000/");
 })
