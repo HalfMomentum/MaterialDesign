@@ -5,7 +5,7 @@
   "main": "server.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "node server.js"
+    "start": "nodemon server.js"
   },
   "repository": {
     "type": "git",
@@ -17,10 +17,18 @@
     "url": "https://github.com/HalfMomentum/MaterialDesign/issues"
   },
   "dependencies": {
+    "bcryptjs": "^2.4.3",
     "body-parser": "*",
+    "connect-flash": "^0.1.1",
     "express": "*",
     "express-handlebars": "^3.0.0",
+    "express-messages": "^1.0.1",
+    "express-session": "^1.15.6",
+    "express-validator": "^5.0.1",
+    "js": "^0.1.0",
     "mongoose": "*",
+    "passport": "^0.4.0",
+    "passport-local": "^1.0.0",
     "pug": "^2.0.0-rc.4"
   },
   "homepage": "https://github.com/HalfMomentum/MaterialDesign#readme"

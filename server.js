@@ -1,13 +1,32 @@
 var express= require('express');
 var app=express();
 var bodyParser=require('body-parser');//<<-- (error 30X) security compromized
-var mongoose= require('mongoose');
+const mongoose= require('mongoose');
 var Path = require('path');	
+const flash = require('connect-flash');
+const session = require('express-session');
+const bcrypt= require('bcryptjs');
+const expressValidator = require('express-validator');
+const passport = require('passport');
+
+app.use(expressValidator())
+
 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({
   extended: true
 }));
+
+
+// Express Messages Middleware
+app.use(require('connect-flash')());
+app.use(function (req, res, next) {
+  res.locals.messages = require('express-messages')(req, res);
+  next();
+});
+
+
+
 
 /*
 Following section added by Madhav
@@ -56,46 +75,116 @@ app.get('/', function(req, res) {
   // res.send('Hello World');
   // if(req.user.authenticated)
   // 	{console.log(req.user.authenticated);}
-  res.sendFile('index.html', {root: __dirname});
+  res.sendFile('index2.html', {root: __dirname});
 });
 
+// app.get("/login",function(req,res){
+// 	res.sendFile("views/LoginPage.html", {root: __dirname});
+// });
+
+// app.post("/login", function(req,res){
+// 	// console.log(req.params);
+// 	console.log(req.body);
+// 	var user= db.collection('user').find(req.body).toArray(function(err, results) {
+//   console.log(results);
+//   	req.user=results[0];
+//   	// req.user.authenticated=true;
+//   	// res.redirect('/')
+//   	res.sendFile('index.html', {root: __dirname, user: req.user, isAuth: req.user.authenticated});
+// 	})
+// 	// console.log(user);
+// })
+
+// app.get("/logout",function(req,res){
+// 	req.user=null;
+// 	res.redirect("/")
+// })
+
+
+// app.get("/register",function(req,res){
+// 	res.sendFile("views/SignupPage.html", {root: __dirname});
+// });
+
+// app.post("/register", function(req,res){
+// 	// console.log(req.params);
+// 	console.log(req.body);
+// 	 db.collection('user').save(req.body, (err, result) => {
+// 	    if (err) return console.log(err)
+// 	    console.log('saved to database');
+// 		console.log("Successfully registered");
+// 	    res.redirect('/')
+// 	  })
+// })
+
+
+
+// Bring in User Model
+let User = require('./models/user');
+
+// Register Form
+app.get('/register', function(req, res){
+  res.sendFile(__dirname+'/views/SignupPage.html');
+});
+
+// Register Proccess
+app.post('/register', function(req, res){
+  const name = req.body.name;
+  const password = req.body.password;
+  const password2 = req.body.password2;
+  console.log(password,"pass=",password2);
+  req.checkBody('name', 'Name is required').notEmpty();
+  req.checkBody('password', 'Password is required').notEmpty();
+  req.checkBody('password2', 'Passwords do not match').equals(req.body.password);
+
+  let errors = req.validationErrors();
+
+  if(errors){
+  	console.log("Ran into errors",errors);
+    res.sendFile(__dirname+'/views/SignupPage.html', {
+      errors:errors
+    });
+  } else {
+    let newUser = new User({
+      name:name,
+      password:password
+    });
+
+    bcrypt.genSalt(10, function(err, salt){
+      bcrypt.hash(newUser.password, salt, function(err, hash){
+        if(err){
+          console.log(err);
+        }
+        newUser.password = hash;
+        newUser.save(function(err){
+          if(err){
+            console.log(err);
+            return;
+          } else {
+            // req.flash('success','You are now registered and can log in');
+            res.redirect('/login');
+          }
+        });
+      });
+    });
+  }
+});
+
+//Login
 app.get("/login",function(req,res){
 	res.sendFile("views/LoginPage.html", {root: __dirname});
 });
 
-app.post("/login", function(req,res){
-	// console.log(req.params);
-	console.log(req.body);
-	var user= db.collection('user').find(req.body).toArray(function(err, results) {
-  console.log(results);
-  	req.user=results[0];
-  	// req.user.authenticated=true;
-  	// res.redirect('/')
-  	res.sendFile('index.html', {root: __dirname, user: req.user, isAuth: req.user.authenticated});
-	})
-	// console.log(user);
-})
-
-app.get("/logout",function(req,res){
-	req.user=null;
-	res.redirect("/")
-})
 
 
-app.get("/register",function(req,res){
-	res.sendFile("views/SignupPage.html", {root: __dirname});
-});
 
-app.post("/register", function(req,res){
-	// console.log(req.params);
-	console.log(req.body);
-	 db.collection('user').save(req.body, (err, result) => {
-	    if (err) return console.log(err)
-	    console.log('saved to database');
-		console.log("Successfully registered");
-	    res.redirect('/')
-	  })
-})
+
+
+
+
+
+
+
+
 
 
 app.listen(3000, function(){
