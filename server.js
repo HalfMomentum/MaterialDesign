@@ -8,13 +8,31 @@ const session = require('express-session');
 const bcrypt = require('bcryptjs');
 const expressValidator = require('express-validator');
 const passport = require('passport');
+const LocalStrategy =require('passport-local').Strategy;
 
 app.use(expressValidator())
+
+require('./config/passport')(passport);
+app.use(passport.initialize());
+app.use(passport.session());
+
+app.get("*",function(req,res,next){
+	res.locals.user = req.user||null;
+	next();
+});
 
 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({
   extended: true
+}));
+
+
+// Express Session Middleware
+app.use(session({
+  secret: 'keyboard cat',
+  resave: true,
+  saveUninitialized: true
 }));
 
 
@@ -24,6 +42,7 @@ app.use(function (req, res, next) {
   res.locals.messages = require('express-messages')(req, res);
   next();
 });
+
 
 
 
@@ -59,7 +78,10 @@ above section is added by Madhav
  */
 
 //Connect to Mongoose
-mongoose.connect("mongodb://localhost/users");
+
+const config = require('./config/database');
+
+mongoose.connect(config.database);
 var db = mongoose.connection;
 
 db.once('open', function () {
@@ -78,6 +100,8 @@ db.on('error', function (err) {
     root: __dirname
   });
 }); */
+
+
 
 // app.get("/login",function(req,res){
 // 	res.sendFile("views/LoginPage.html", {root: __dirname});
@@ -168,7 +192,7 @@ app.post('/register', function (req, res) {
             console.log(err);
             return;
           } else {
-            // req.flash('success','You are now registered and can log in');
+            req.flash('success','You are now registered and can log in');
             res.redirect('/login');
           }
         });
@@ -185,6 +209,25 @@ app.get("/login", function (req, res) {
   res.render('login.html',{title:'Log In',layout:'layout_info'})
 });
 
-app.listen(3000, function () {
-  console.log("Listening on port http://localhost:3000/");
+
+app.post("/login", function(req,res,next){
+	passport.authenticate('local', {
+		successRedirect: '/',
+		failureRedirect: '/login',
+		failureFlash: true
+	})(req,res,next);
+	// console.log("Request.user=",req.user);
+})
+
+
+app.get("/logout",function(req,res,next){
+	req.logout();
+	req.flash("success","Successfully Logged Out");
+	console.log("Successfully Logged Out");
+	res.redirect("/");
+});
+
+
+app.listen(3000, function(){
+	console.log("Listening on port http://localhost:3000/");
 })
