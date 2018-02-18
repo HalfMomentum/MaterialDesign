@@ -34,8 +34,9 @@ Following section added by Madhav
 
 //adding static folder to serve css,js,images, etc
 app.use(express.static(__dirname+'/assets'));
-/**
- * setting up view engine to render html files beautifully
+
+/*
+ * setting up view engine to render html files
  */
 var exphbs = require('express-handlebars');
 
