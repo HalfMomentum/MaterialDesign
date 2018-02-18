@@ -183,14 +183,14 @@
             <a href="#sidebar" data-toggle="collapse"><i class="fa fa-navicon fa-lg"></i></a>
             <hr>
             <div class="page-header">
-                <h1>Bootstrap 4 Sidebar Menu </h1>
+                <h1>Bootstrap 4 Sidebar Menu {{user}}  </h1>
             </div>
             <p class="lead">A responsive, multi-level vertical accordion.</p>
         </main>
     </div>
 </div>
     </script>
-<script type="text/javascript"> 
+<script type="text/javascript">   console.log("asjdoasdoasopd");
         // console.log(user);
         $("#subitem2b").click(function(){
             // alert("asodp");
@@ -202,11 +202,8 @@
         })
         </script>
     <script type="text/javascript">
-        console.log("yolo");
-        // console.log("process",process.env.user);
-        // console.log("Req.user=",req.user);
-
-        console.log(window.localStorage.getItem("User"));
+        console.log(process.env.user);
+        console.log(req.user);
     </script>
 </body>
 </html>
