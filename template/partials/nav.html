@@ -1,17 +1,27 @@
-<nav class="navbar sticky-top navbar-expand navbar-dark bg-dark mr-auto justify-content-between">
+<nav class="navbar sticky-top navbar-expand navbar-light bg-light mr-auto justify-content-between">
     <div class="navbar-nav">
         <a class="navbar-brand" href="#">
-            <img src="images/logo.png" class="align-middle" height="30" alt="LOGO">
+            <img src="images/logo_sy.png" class="align-middle" height="40" alt="LOGO">
         </a>
         <a href="about" class="nav-item nav-link">About</a>
-        <a href="#" class="nav-item nav-link">Features</a>
-        <a href="#" class="nav-item nav-link">Pricing</a>
-        <a href="#" class="nav-item nav-link">Support</a>
+        <a href="feature" class="nav-item nav-link">Features</a>
+        <a href="pricing" class="nav-item nav-link">Pricing</a>
+        <a href="support" class="nav-item nav-link">Support</a>
     </div>
     <div class="navbar-nav">
         {{#if user}}
-        <a href="logout" class="nav-item nav-link">Logout</a>        
-        <a href="profile" class="nav-item nav-link">{{user.name}}</a>
+        <div class="btn-group dropdown pr-5">
+            <button type="button" class="btn btn-white dropdown-toggle" data-toggle="dropdown" aria-haspopup="false" aria-expanded="false">
+                {{user.name}}
+            </button>
+            <div class="dropdown-menu">
+                <a class="dropdown-item" href="profile">Profile</a>
+                <a class="dropdown-item" href="#">View Team</a>
+                <div class="dropdown-divider"></div>
+                <a class="dropdown-item" href="logout">Logout</a>
+                <a class="dropdown-item" href="profile">Change Password</a>
+            </div>
+        </div>
         {{else}}
         <a href="login" class="nav-item nav-link">Login</a>
         <a href="register" class="nav-item nav-link">Register</a>

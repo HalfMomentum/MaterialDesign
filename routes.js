@@ -26,6 +26,29 @@ router.get('/input', function (req, res) {
     });
 });
 
+router.get('/support', function (req, res) {
+
+    res.render('support.html', /*context goes here*/ {
+        "title": "support",
+        layout: 'layout_info'
+    });
+});
+router.get('/feature', function (req, res) {
+
+    res.render('feature.html', /*context goes here*/ {
+        "title": "Features",
+        layout: 'layout_info'
+    });
+});
+
+router.get('/pricing', function (req, res) {
+
+    res.render('pricing.html', /*context goes here*/ {
+        "title": "Price",
+        layout: 'layout_info'
+    });
+});
+
 router.get('/signin', function (req, res) {
 
     res.render('login.html', /*context goes here*/ {

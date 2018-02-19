@@ -1,3 +1,4 @@
+
 <div class="container-fluid">
 
 
@@ -10,7 +11,7 @@
             <div class="collapse" id="menu1">
                 <a href="#" class="list-group-item" data-toggle="collapse" aria-expanded="false" id="Structural">Structural</a>
                 <a href="#" class="list-group-item" data-toggle="collapse" aria-expanded="false" id="Thermal">Thermal</a>
-                <a href="#" class="list-group-item" data-toggle="collapse" aria-expanded="false" id="Fluent">Fluent </a>
+                <a href="#" class="list-group-item" data-toggle="collapse" aria-expanded="false" id="Fluid">Fluid </a>
             </div>
             <a href="#menu2" class="list-group-item collapsed" data-toggle="collapse" data-parent="#sidebar" aria-expanded="false" id="Preprocessor">
                 <i class="fa fa-dashboard"></i>
@@ -18,7 +19,7 @@
             </a>
             <div class="collapse" id="menu2">
                 <a href="#" class="list-group-item" data-toggle="collapse" aria-expanded="false" id="Ropts">Radiation opts</a>
-                <a href="#" class="list-group-item" data-toggle="collapse" aria-expanded="false" id="Vopts">Velocity</a>
+                <a href="#" class="list-group-item" data-toggle="collapse" aria-expanded="false" id="Vopts">Velocity opts</a>
                 <a href="#" class="list-group-item" data-toggle="collapse" aria-expanded="false" id="Sections">Sections</a>
             </div>
             <a href="#menu3" class="list-group-item collapsed" data-toggle="collapse" data-parent="#sidebar" aria-expanded="false">
@@ -45,35 +46,35 @@
         $("#Ropts").show();
         $("#Sections").show();
         $("#ast").hide();
+
+        $("#Thermal").addClass("bg-gray");
+        $("#Structural").removeClass("bg-gray");
+        $("#Fluid").removeClass("bg-gray");
     })
     $("#Structural").click(function () {
         // alert("asodp");
         // $("#Vopts").toggle();
         // $("#Ropts").toggle();
         // $("#ast").toggle();
+        $("#Thermal").removeClass("bg-gray");
+        $("#Structural").addClass("bg-gray");
+        $("#Fluid").removeClass("bg-gray");
         $("#Vopts").hide();
         $("#Ropts").hide();
         $("#Sections").show();
         $("#ast").hide();
     })
-    $("#Fluent").click(function () {
+    $("#Fluid").click(function () {
         // alert("asodp");
+
+        $("#Thermal").removeClass("bg-gray");
+        $("#Structural").removeClass("bg-gray");
+        $("#Fluid").addClass("bg-gray");
         $("#Vopts").show();
         $("#Ropts").hide();
         $("#Sections").show();
         $("#ast").show();
     })
-    $("#Thermal").click(function () {
-        // alert("asodp");
-        $("#Vopts").addClass("dispn");
-    })
-    $("#Thermal").click(function () {
-        // alert("asodp");
-        $("#Vopts").addClass("dispn");
-    })
-    $("#Thermal").click(function () {
-        // alert("asodp");
-        $("#Vopts").addClass("dispn");
-    })
+    
 </script>
 </div>
