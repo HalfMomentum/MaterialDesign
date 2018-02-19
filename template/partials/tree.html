@@ -1,3 +1,28 @@
+<div id="myModal" class="modal fade" role="dialog">
+    <div class="modal-dialog">
+
+        <!-- Modal content-->
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                
+            </div>
+            <div class="modal-body">
+                <form action="#">
+                    <label for="ym">Youngs Modulus</label>
+                    <input type="text" name="ym" class="form-control"><br>
+                    <label for="pr">Poisson's Ratio</label>
+                    <input type="text" name="pr" class="form-control">
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Submit</button>
+            </div>
+        </div>
+
+    </div>
+</div>
+
 
 <div class="container-fluid">
 
@@ -20,7 +45,8 @@
             <div class="collapse" id="menu2">
                 <a href="#" class="list-group-item" data-toggle="collapse" aria-expanded="false" id="Ropts">Radiation opts</a>
                 <a href="#" class="list-group-item" data-toggle="collapse" aria-expanded="false" id="Vopts">Velocity opts</a>
-                <a href="#" class="list-group-item" data-toggle="collapse" aria-expanded="false" id="Sections">Sections</a>
+                <a href="/input" class="list-group-item" data-toggle="collapse" aria-expanded="false" id="Sections">Mesh</a>
+                <a href="#" class="list-group-item" data-toggle="modal" data-target="#myModal" aria-expanded="false" id="mp">Material Properties</a>
             </div>
             <a href="#menu3" class="list-group-item collapsed" data-toggle="collapse" data-parent="#sidebar" aria-expanded="false">
                 <i class="fa fa-dashboard"></i>
@@ -34,47 +60,48 @@
         </div>
     </div>
 
-<script type="text/javascript">
-    // console.log(user);
-    $("#Thermal").click(function () {
-        // alert("asodp");
-        // $("#Vopts").toggle();
-        // $("#Ropts").removeClass("dispn");
-        // $("#ast").toggle();
-        // $("#Preprocessor").toggleClass("collapsed");
-        $("#Vopts").hide();
-        $("#Ropts").show();
-        $("#Sections").show();
-        $("#ast").hide();
+    <script type="text/javascript">
+        // console.log(user);
+        $("#Thermal").click(function () {
+            // alert("asodp");
+            // $("#Vopts").toggle();
+            // $("#Ropts").removeClass("dispn");
+            // $("#ast").toggle();
+            // $("#Preprocessor").toggleClass("collapsed");
+            $("#Vopts").hide();
+            $("#Ropts").show();
+            $("#Sections").show();
+            $("#ast").hide();
 
-        $("#Thermal").addClass("bg-gray");
-        $("#Structural").removeClass("bg-gray");
-        $("#Fluid").removeClass("bg-gray");
-    })
-    $("#Structural").click(function () {
-        // alert("asodp");
-        // $("#Vopts").toggle();
-        // $("#Ropts").toggle();
-        // $("#ast").toggle();
-        $("#Thermal").removeClass("bg-gray");
-        $("#Structural").addClass("bg-gray");
-        $("#Fluid").removeClass("bg-gray");
-        $("#Vopts").hide();
-        $("#Ropts").hide();
-        $("#Sections").show();
-        $("#ast").hide();
-    })
-    $("#Fluid").click(function () {
-        // alert("asodp");
-
-        $("#Thermal").removeClass("bg-gray");
-        $("#Structural").removeClass("bg-gray");
-        $("#Fluid").addClass("bg-gray");
-        $("#Vopts").show();
-        $("#Ropts").hide();
-        $("#Sections").show();
-        $("#ast").show();
-    })
-    
-</script>
+            $("#Thermal").addClass("bg-gray");
+            $("#Structural").removeClass("bg-gray");
+            $("#Fluid").removeClass("bg-gray");
+            $("#mp").hide();
+        })
+        $("#Structural").click(function () {
+            // alert("asodp");
+            // $("#Vopts").toggle();
+            // $("#Ropts").toggle();
+            // $("#ast").toggle();
+            $("#Thermal").removeClass("bg-gray");
+            $("#Structural").addClass("bg-gray");
+            $("#Fluid").removeClass("bg-gray");
+            $("#Vopts").hide();
+            $("#Ropts").hide();
+            $("#mp").show();
+            $("#Sections").show();
+            $("#ast").hide();
+        })
+        $("#Fluid").click(function () {
+            // alert("asodp");
+            $("#mp").hide();
+            $("#Thermal").removeClass("bg-gray");
+            $("#Structural").removeClass("bg-gray");
+            $("#Fluid").addClass("bg-gray");
+            $("#Vopts").show();
+            $("#Ropts").hide();
+            $("#Sections").show();
+            $("#ast").show();
+        })
+    </script>
 </div>
